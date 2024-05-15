@@ -172,7 +172,7 @@ docker run -it --gpus all -p 8080:8080                  \
   </div></div>
 <p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您在H800或V100上运行代码，我们建议使用triton-nightly，triton-nightly具有明显的CPU瓶颈，导致低并发级别下的高解码延迟。您可以观察</font></font><a href="https://github.com/openai/triton/issues/3619" data-hovercard-type="issue" data-hovercard-url="/triton-lang/triton/issues/3619/hovercard"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">这个问题</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">并</font></font><a href="https://github.com/openai/triton/pull/3638" data-hovercard-type="pull_request" data-hovercard-url="/triton-lang/triton/pull/3638/hovercard"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">修复PR</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。您可以尝试自己修改并编译源代码来解决这个问题。</font></font></p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>pip install -U --index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/simple/ triton-nightly --no-deps</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="pip install -U --index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/simple/ triton-nightly --no-deps" tabindex="0" role="button">
+    
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
     <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
 </svg>
@@ -356,39 +356,7 @@ else:
     <span class="pl-en">print</span>(<span class="pl-s1">response</span>.<span class="pl-en">json</span>())
 <span class="pl-k">else</span>:
     <span class="pl-en">print</span>(<span class="pl-s">'Error:'</span>, <span class="pl-s1">response</span>.<span class="pl-s1">status_code</span>, <span class="pl-s1">response</span>.<span class="pl-s1">text</span>)</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import time
-import requests
-import json
-import base64
-
-url = 'http://localhost:8080/generate'
-headers = {'Content-Type': 'application/json'}
-
-uri = &quot;/local/path/of/image&quot; # or &quot;/http/path/of/image&quot;
-if uri.startswith(&quot;http&quot;):
-    images = [{&quot;type&quot;: &quot;url&quot;, &quot;data&quot;: uri}]
-else:
-    with open(uri, 'rb') as fin:
-        b64 = base64.b64encode(fin.read()).decode(&quot;utf-8&quot;)
-    images=[{'type': &quot;base64&quot;, &quot;data&quot;: b64}]
-
-data = {
-    &quot;inputs&quot;: &quot;<img></img>Generate the caption in English with grounding:&quot;,
-    &quot;parameters&quot;: {
-        &quot;max_new_tokens&quot;: 200,
-        # The space before <|endoftext|> is important, the server will remove the first bos_token_id, but QWen tokenizer does not has bos_token_id
-        &quot;stop_sequences&quot;: [&quot; <|endoftext|>&quot;],
-    },
-    &quot;multimodal_params&quot;: {
-        &quot;images&quot;: images,
-    }
-}
-
-response = requests.post(url, headers=headers, data=json.dumps(data))
-if response.status_code == 200:
-    print(response.json())
-else:
-    print('Error:', response.status_code, response.text)" tabindex="0" role="button">
+  
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
     <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
 </svg>
@@ -490,28 +458,6 @@ def run_once(query, uris):
     else:
         print(' + error: {}, {}'.format(response.status_code, response.text))
 
-&quot;&quot;&quot;
-multi-img, multi-round:
-
-<|im_start|>system
-You are a helpful assistant.<|im_end|>
-<|im_start|>user
-<img></img>
-<img></img>
-上面两张图片分别是哪两个城市？请对它们进行对比。<|im_end|>
-<|im_start|>assistant
-根据提供的信息，两张图片分别是重庆和北京。<|im_end|>
-<|im_start|>user
-这两座城市分别在什么地方？<|im_end|>
-<|im_start|>assistant
-&quot;&quot;&quot;
-run_once(
-    uris = [
-        &quot;assets/mm_tutorial/Chongqing.jpeg&quot;,
-        &quot;assets/mm_tutorial/Beijing.jpeg&quot;,
-    ],
-    query = &quot;<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n<img></img>\n<img></img>\n上面两张图片分别是哪两个城市？请对它们进行对比。<|im_end|>\n<|im_start|>assistant\n根据提供的信息，两张图片分别是重庆和北京。<|im_end|>\n<|im_start|>user\n这两座城市分别在什么地方？<|im_end|>\n<|im_start|>assistant\n&quot;
-)" tabindex="0" role="button">
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
     <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
 </svg>
@@ -552,21 +498,7 @@ run_once(
     <span class="pl-en">print</span>(<span class="pl-s1">response</span>.<span class="pl-en">json</span>())
 <span class="pl-k">else</span>:
     <span class="pl-en">print</span>(<span class="pl-s">'Error:'</span>, <span class="pl-s1">response</span>.<span class="pl-s1">status_code</span>, <span class="pl-s1">response</span>.<span class="pl-s1">text</span>)</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import time
-import requests
-import json
-import base64
-
-url = 'http://localhost:8080/generate'
-headers = {'Content-Type': 'application/json'}
-
-uri = &quot;/local/path/of/image&quot; # or &quot;/http/path/of/image&quot;
-if uri.startswith(&quot;http&quot;):
-    images = [{&quot;type&quot;: &quot;url&quot;, &quot;data&quot;: uri}]
-else:
-    with open(uri, 'rb') as fin:
-        b64 = base64.b64encode(fin.read()).decode(&quot;utf-8&quot;)
-    images=[{'type': &quot;base64&quot;, &quot;data&quot;: b64}]
+    
 
 data = {
     &quot;inputs&quot;: &quot;A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human's questions. USER: <image>\nPlease explain the picture. ASSISTANT:&quot;,
@@ -619,20 +551,7 @@ else:
   </div></div>
 <p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">启动服务：</font></font></p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>python -m lightllm.server.api_server --model_dir /path/llama-7b --tp 1 --max_total_token_num 121060 --tokenizer_mode auto</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="python -m lightllm.server.api_server --model_dir /path/llama-7b --tp 1 --max_total_token_num 121060 --tokenizer_mode auto" tabindex="0" role="button">
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
-    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
-</svg>
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
-    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
-</svg>
-    </clipboard-copy>
-  </div></div>
-<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评估：</font></font></p>
-<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-c1">cd</span> <span class="pl-c1">test</span>
-python benchmark_serving.py --tokenizer /path/llama-7b --dataset /path/ShareGPT_V3_unfiltered_cleaned_split.json --num-prompts 2000 --request-rate 200</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="cd test
-python benchmark_serving.py --tokenizer /path/llama-7b --dataset /path/ShareGPT_V3_unfiltered_cleaned_split.json --num-prompts 2000 --request-rate 200" tabindex="0" role="button">
+   
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
     <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
 </svg>
@@ -660,8 +579,7 @@ python benchmark_serving.py --tokenizer /path/llama-7b --dataset /path/ShareGPT_
 <p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">为了调试，我们为各种模型提供静态性能测试脚本。例如，您可以通过以下方式评估 LLaMA 模型的推理性能</font></font></p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-c1">cd</span> test/model
 python test_llama.py</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="cd test/model
-python test_llama.py" tabindex="0" role="button">
+ 
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
     <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
 </svg>
